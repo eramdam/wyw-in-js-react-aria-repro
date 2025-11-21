@@ -1,8 +1,6 @@
-import { css } from '@linaria/core';
-import type { ComponentProps, PropsWithChildren } from 'react';
-import {Button as RACButton} from 'react-aria-components';
-
-type ButtonProps = PropsWithChildren<ComponentProps<typeof RACButton>>;
+import { css } from "@linaria/core";
+import type { ComponentProps, PropsWithChildren } from "react";
+import * as RAC from "react-aria-components";
 
 const buttonStyles = css`
   background-color: rebeccapurple;
@@ -23,14 +21,20 @@ const buttonStyles = css`
   }
 `;
 
+type ButtonProps = PropsWithChildren<ComponentProps<typeof RAC.Button>>;
+
 // Crashes with `[plugin:wyw-in-js] 0 is not a constructor in node_modules/.vite/deps/react-aria-components.js`
 // export function Button(props: PropsWithChildren<ButtonProps>) {
-//   const {children, ...rest} = props;
-//   return <RACButton {...rest} className={buttonStyles}>{children}</RACButton>
+//   const { children, ...rest } = props;
+//   return (
+//     <RAC.Button {...rest} className={buttonStyles}>
+//       {children}
+//     </RAC.Button>
+//   );
 // }
 
 // Works fine
-export const Button = (props:PropsWithChildren<ButtonProps>) => {
-   const {children, ...rest} = props;
-  return <RACButton {...rest} className={buttonStyles}>{children}</RACButton>
-}
+export const Button = (props: PropsWithChildren<ButtonProps>) => {
+  const { children, ...rest } = props;
+  return <RAC.Button {...rest} className={buttonStyles}>{children}</RAC.Button>;
+};
